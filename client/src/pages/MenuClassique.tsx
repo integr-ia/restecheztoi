@@ -9,31 +9,19 @@ export default function MenuClassique() {
   const menus = [
     {
       id: 1,
-      title: "Classique 1",
+      title: "Classique Hiver",
       isVegetarian: false,
       dishes: {
-        amuse: "Malakoff",
-        entree1: "Galantine de volaille farcie aux champignons, ketchup de potimarron, tuile châtaigne",
-        entree2: "Poisson poché aux épices, chou chinois sauté au vinaigre de pommes, beurre blanc et crumble aux figues",
-        plat: "Carré d'agneau, gratin de légumes, pommes de terre rissolées, jus corsé à la moutarde à l'ancienne et au miel",
-        dessert: "Tarte Tatin, glace vanille",
+        amuse: "Brick d'hiver",
+        entree1: "Feuilletés de magret de canard fumé et endives braisées/caramélisées",
+        entree2: "Tataki de veau, réduction de marinade, purée de panais",
+        plat: "Carré d'agneau en croûte d'épices, ratatouille de légumes d'hiver, pommes duchesse",
+        dessert: "Déclinaisons de butternut",
       },
     },
     {
       id: 2,
-      title: "Classique 2",
-      isVegetarian: false,
-      dishes: {
-        amuse: "Bouchées de poulet, sauce caramel sésame",
-        entree1: "Œuf frit au lard, crème de pommes de terre, champignons sautés",
-        entree2: "Soupe de poisson, croûtons et rouille",
-        plat: "Bœuf bourguignon, purée de pommes de terre, tuiles au vin rouge épicées",
-        dessert: "Moelleux au chocolat, sauce fruits rouges",
-      },
-    },
-    {
-      id: 3,
-      title: "Classique 3",
+      title: "Classique Végétarien",
       isVegetarian: true,
       dishes: {
         amuse: "Velouté de topinambours, éclats de noisettes et huile de persil",

@@ -9,27 +9,17 @@ export default function MenuDecouverte() {
   const menus = [
     {
       id: 1,
-      title: "Découverte 1",
+      title: "Découverte Hiver",
       isVegetarian: false,
       dishes: {
-        entree: "Velouté de potimarron caramélisé, crème montée au lard, crumble lard/noisettes",
-        plat: "Coquelet rôti, gratin de pommes de terre, légumes de saison, jus corsé",
-        dessert: "Fondant au chocolat",
+        entree: "Tatin de betteraves",
+        plat: "Volaille en 5 déclinaisons, accompagnement de saison",
+        dessert: "Suprême de mandarine rôtie, sauce au pain d'épice",
       },
     },
     {
       id: 2,
-      title: "Découverte 2",
-      isVegetarian: false,
-      dishes: {
-        entree: "Feuilletés aux champignons, émulsion légère",
-        plat: "Mousse de poisson frit, julienne de légumes racines et pommes rissolées, huile vierge à la figue",
-        dessert: "Crumble aux figues",
-      },
-    },
-    {
-      id: 3,
-      title: "Découverte 3",
+      title: "Découverte Végétarien",
       isVegetarian: true,
       dishes: {
         entree: "Velouté de potimarron caramélisé, huile de noisettes torréfiées, pickles d'oignons",
