@@ -16,6 +16,7 @@ const MenuHautDeGamme = lazy(() => import("./pages/MenuHautDeGamme"));
 const NosMenus = lazy(() => import("./pages/NosMenus"));
 const Confidentialite = lazy(() => import("./pages/Confidentialite"));
 const MentionsLegales = lazy(() => import("./pages/MentionsLegales"));
+const Livraison = lazy(() => import("./pages/Livraison"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 // Composant de chargement simple
@@ -43,6 +44,7 @@ function Router() {
         <Route path="/menu-hautdegamme" component={MenuHautDeGamme} />
         <Route path="/contact" component={Contact} />
         <Route path="/reservation" component={Reservation} />
+        <Route path="/livraison" component={Livraison} />
         <Route path="/confidentialite" component={Confidentialite} />
         <Route path="/mentions-legales" component={MentionsLegales} />
         <Route path={"/404"} component={NotFound} />
@@ -56,11 +58,4 @@ function App() {
   return (
     <ErrorBoundary>
       <ThemeProvider defaultTheme="light" switchable>
-        <ScrollToTop />
-        <Router />
-      </ThemeProvider>
-    </ErrorBoundary>
-  );
-}
-
-export default App;
+    

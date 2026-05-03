@@ -30,14 +30,12 @@ const dataset = (import.meta.env.VITE_SANITY_DATASET as string | undefined) || "
 
 export const sanityEnabled = Boolean(projectId);
 
-console.log("[Sanity] projectId:", projectId, "| enabled:", Boolean(projectId));
-
 export const sanity: SanityClient | null = projectId
   ? createClient({
       projectId,
       dataset,
       apiVersion: "2024-10-01",
-      useCdn: false, // désactive le cache CDN
+      useCdn: true,
     })
   : null;
 
@@ -157,3 +155,9 @@ export async function fetchAllMenus(): Promise<SanityMenu[]> {
     return [];
   }
 }
+
+// === Types : service de livraison ===
+
+export interface DeliveryServiceStep {
+  icon: string;
+  title: stri

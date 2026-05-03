@@ -41,26 +41,15 @@ export default defineConfig({
                   .title("Menus")
                   .defaultOrdering([{ field: "displayOrder", direction: "asc" }])
               ),
-          ]),
-    }),
-    visionTool(),
-  ],
-
-  schema: {
-    types: schemaTypes,
-  },
-
-  // Localisation française de l'interface
-  studio: {
-    components: {},
-  },
-
-  // Désactiver les types non utilisés dans le menu de création
-  document: {
-    newDocumentOptions: (prev) =>
-      prev.filter((option) => option.templateId === "menu"),
-  },
-});
-
-// Ne pas supprimer cet export - il est requis par certains outils
-export { frFR };
+            S.divider(),
+            // --- Singletons : service de livraison ---
+            S.listItem()
+              .title("Service de livraison (contenu page)")
+              .id("deliveryService")
+              .child(
+                S.document()
+                  .schemaType("deliveryService")
+                  .documentId("deliveryService")
+                  .title("Service de livraison")
+              ),
+            S.listIte

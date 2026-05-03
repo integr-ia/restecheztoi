@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Link } from "wouter";
-import { Calendar, ChefHat, Utensils, Star, Users, Award, MessageCircle, Sparkles } from "lucide-react";
+import { Calendar, ChefHat, Utensils, Star, Users, Award, MessageCircle, Sparkles, Truck } from "lucide-react";
 import { useMenus } from "@/hooks/useMenu";
 import { urlForImageSized, type SanityMenu } from "@/lib/sanity";
 import { DEFAULT_MENU_IMAGES } from "@/lib/defaultMenus";
@@ -385,25 +385,16 @@ export default function Home() {
           </div>
         </section>
 
-        {/* CTA Final */}
-        <section className="py-16 bg-background">
-          <div className="container text-center">
-            <p className="text-primary text-xl font-medium mb-3">Une question ? Un projet ?</p>
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">Prêt à Vivre l'Expérience ?</h2>
-            <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-              Réservez dès maintenant votre chef à domicile et créez ensemble un menu sur mesure pour votre événement.
-            </p>
-            <Link href="/reservation">
-              <Button size="lg" className="rounded-full px-10 text-lg h-14">
-                Réserver une Date
-              </Button>
-            </Link>
-          </div>
-        </section>
-      </main>
-      
-      <Footer />
-    </div>
-  );
-}
-
+        {/* Section Livraison de repas */}
+        <section className="py-16 bg-background border-t border-border">
+          <div className="container max-w-5xl">
+            <Card className="border-2 border-primary/30 shadow-xl overflow-hidden">
+              <div className="grid md:grid-cols-2 gap-0">
+                {/* Partie gauche : icône + badge prix */}
+                <div className="bg-primary/5 flex flex-col items-center justify-center p-10 gap-6">
+                  <div className="w-24 h-24 rounded-full bg-primary/10 flex items-center justify-center">
+                    <Truck className="w-12 h-12 text-primary" />
+                  </div>
+                  <div className="text-center">
+                    <div className="inline-flex flex-col items-center bg-primary/10 border border-primary/20 rounded-xl px-6 py-3 gap-0.5">
+  

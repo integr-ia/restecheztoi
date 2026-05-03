@@ -12,6 +12,7 @@ export default function Header() {
     { href: "/", label: "Accueil" },
     { href: "/comment-ca-marche", label: "Comment ça marche" },
     { href: "/nos-menus", label: "Nos Menus" },
+    { href: "/livraison", label: "Livraison" },
     { href: "/a-propos", label: "À propos" },
     { href: "/contact", label: "Contact" },
   ];
@@ -81,9 +82,4 @@ export default function Header() {
               </Button>
             </Link>
           </nav>
-        </div>
-      )}
-    </header>
-  );
-}
-
+   
