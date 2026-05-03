@@ -249,7 +249,7 @@ export default function Home() {
               {/* Menu Découverte */}
               <Card className="border-2 border-border shadow-lg hover:shadow-xl transition-shadow overflow-hidden">
                 <div className="relative h-48">
-                  <img src="/menu-decouverte.png" alt="Menu Découverte" className="w-full h-full object-cover" />
+                  <img src="/menu-decouverte.png?v=2" alt="Menu Découverte" className="w-full h-full object-cover" />
                 </div>
                 <CardContent className="p-6">
                   <h3 className="text-2xl font-bold mb-2 text-foreground">Menu Découverte</h3>
@@ -266,7 +266,7 @@ export default function Home() {
               {/* Menu Classique */}
               <Card className="border-2 border-primary shadow-xl hover:shadow-2xl transition-shadow overflow-hidden">
                 <div className="relative h-48">
-                  <img src="/menu-classique.jpg" alt="Menu Classique" className="w-full h-full object-cover" />
+                  <img src="/menu-classique.jpg?v=2" alt="Menu Classique" className="w-full h-full object-cover" />
                 </div>
                 <CardContent className="p-6">
                   <h3 className="text-2xl font-bold mb-2 text-foreground">Menu Classique</h3>

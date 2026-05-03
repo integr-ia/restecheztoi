@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd:*)",
+      "Bash(gh auth:*)",
+      "Bash(curl:*)",
+      "Bash(echo no json in public:*)",
+      "Bash(tail:*)",
+      "Bash(head:*)"
+    ]
+  }
+}
