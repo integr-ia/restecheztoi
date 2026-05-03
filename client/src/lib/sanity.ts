@@ -30,12 +30,14 @@ const dataset = (import.meta.env.VITE_SANITY_DATASET as string | undefined) || "
 
 export const sanityEnabled = Boolean(projectId);
 
+console.log("[Sanity] projectId:", projectId, "| enabled:", Boolean(projectId));
+
 export const sanity: SanityClient | null = projectId
   ? createClient({
       projectId,
       dataset,
       apiVersion: "2024-10-01",
-      useCdn: true, // CDN pour de meilleures perfs en production
+      useCdn: false, // désactive le cache CDN
     })
   : null;
 

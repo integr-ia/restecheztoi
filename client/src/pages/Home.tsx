@@ -4,8 +4,18 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Link } from "wouter";
 import { Calendar, ChefHat, Utensils, Star, Users, Award, MessageCircle, Sparkles } from "lucide-react";
+import { useMenus } from "@/hooks/useMenu";
+import { urlForImageSized, type SanityMenu } from "@/lib/sanity";
+import { DEFAULT_MENU_IMAGES } from "@/lib/defaultMenus";
+
+const SLUG_TO_URL: Record<SanityMenu["slug"], string> = {
+  decouverte: "/menu-decouverte",
+  classique: "/menu-classique",
+  hautdegamme: "/menu-hautdegamme",
+};
 
 export default function Home() {
+  const { menus, isLoading } = useMenus();
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -245,58 +255,57 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto mb-8">
-              {/* Menu Découverte */}
-              <Card className="border-2 border-border shadow-lg hover:shadow-xl transition-shadow overflow-hidden">
-                <div className="relative h-48">
-                  <img src="/menu-decouverte.png?v=2" alt="Menu Découverte" className="w-full h-full object-cover" />
-                </div>
-                <CardContent className="p-6">
-                  <h3 className="text-2xl font-bold mb-2 text-foreground">Menu Découverte</h3>
-                  <p className="text-lg text-muted-foreground mb-5">L'art de bien commencer</p>
-                  <div className="mb-5">
-                    <span className="text-4xl font-bold text-primary">130 CHF</span>
-                  </div>
-                  <Link href="/menu-decouverte">
-                    <Button className="w-full rounded-full text-lg h-12">Découvrir</Button>
-                  </Link>
-                </CardContent>
-              </Card>
-
-              {/* Menu Classique */}
-              <Card className="border-2 border-primary shadow-xl hover:shadow-2xl transition-shadow overflow-hidden">
-                <div className="relative h-48">
-                  <img src="/menu-classique.jpg?v=2" alt="Menu Classique" className="w-full h-full object-cover" />
-                </div>
-                <CardContent className="p-6">
-                  <h3 className="text-2xl font-bold mb-2 text-foreground">Menu Classique</h3>
-                  <p className="text-lg text-muted-foreground mb-5">L'essence de notre savoir-faire.</p>
-                  <div className="mb-5">
-                    <span className="text-4xl font-bold text-primary">200 CHF</span>
-                  </div>
-                  <Link href="/menu-classique">
-                    <Button className="w-full rounded-full text-lg h-12">Découvrir</Button>
-                  </Link>
-                </CardContent>
-              </Card>
-
-              {/* Menu Haut de Gamme */}
-              <Card className="border-2 border-border shadow-lg hover:shadow-xl transition-shadow overflow-hidden">
-                <div className="relative h-48">
-                  <img src="/menu-haut-de-gamme.png" alt="Menu Haut de Gamme" className="w-full h-full object-cover" />
-                </div>
-                <CardContent className="p-6">
-                  <h3 className="text-2xl font-bold mb-2 text-foreground">Menu Haut de Gamme</h3>
-                  <p className="text-lg text-muted-foreground mb-5">Quand on sort le grand jeu</p>
-                  <div className="mb-5">
-                    <span className="text-4xl font-bold text-primary">280 CHF</span>
-                  </div>
-                  <Link href="/menu-hautdegamme">
-                    <Button className="w-full rounded-full text-lg h-12">Découvrir</Button>
-                  </Link>
-                </CardContent>
-              </Card>
-            </div>
+            {isLoading ? (
+              <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto mb-8">
+                {[1, 2, 3].map((i) => (
+                  <Card key={i} className="border-2 border-border shadow-lg overflow-hidden animate-pulse">
+                    <div className="h-48 bg-muted" />
+                    <CardContent className="p-6 space-y-4">
+                      <div className="h-6 bg-muted rounded w-3/4" />
+                      <div className="h-4 bg-muted rounded w-1/2" />
+                      <div className="h-8 bg-muted rounded w-1/3" />
+                      <div className="h-12 bg-muted rounded-full" />
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            ) : (
+              <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto mb-8">
+                {menus.map((menu) => {
+                  const isFeatured = menu.slug === "classique";
+                  const imageSrc =
+                    urlForImageSized(menu.thumbnailImage, 800, 600) ??
+                    DEFAULT_MENU_IMAGES[menu.slug].thumbnail;
+                  const linkHref = SLUG_TO_URL[menu.slug] || "#";
+                  return (
+                    <Card
+                      key={menu._id}
+                      className={
+                        isFeatured
+                          ? "border-2 border-primary shadow-xl hover:shadow-2xl transition-shadow overflow-hidden"
+                          : "border-2 border-border shadow-lg hover:shadow-xl transition-shadow overflow-hidden"
+                      }
+                    >
+                      <div className="relative h-48">
+                        <img src={imageSrc} alt={menu.title} className="w-full h-full object-cover" />
+                      </div>
+                      <CardContent className="p-6">
+                        <h3 className="text-2xl font-bold mb-2 text-foreground">{menu.title}</h3>
+                        {menu.subtitle && (
+                          <p className="text-lg text-muted-foreground mb-5">{menu.subtitle}</p>
+                        )}
+                        <div className="mb-5">
+                          <span className="text-4xl font-bold text-primary">{menu.price} CHF</span>
+                        </div>
+                        <Link href={linkHref}>
+                          <Button className="w-full rounded-full text-lg h-12">Découvrir</Button>
+                        </Link>
+                      </CardContent>
+                    </Card>
+                  );
+                })}
+              </div>
+            )}
 
             <p className="text-center text-base text-muted-foreground max-w-4xl mx-auto">
               Tous nos menus sont personnalisables selon vos préférences, allergies et restrictions alimentaires. Options végétariennes disponibles.
