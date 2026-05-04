@@ -58,4 +58,11 @@ function App() {
   return (
     <ErrorBoundary>
       <ThemeProvider defaultTheme="light" switchable>
-    
+            <ScrollToTop />
+        <Router />
+      </ThemeProvider>
+    </ErrorBoundary>
+  );
+}
+
+export default App;

@@ -192,4 +192,79 @@ export default function Livraison() {
           <div className="container">
             <div className="text-center mb-12">
               <p className="text-primary text-xl font-medium mb-3">Un besoin particulier ?</p>
-              <h2 className="text
+              <h2 className="text-4xl md:text-5xl font-bold text-foreground">
+                Menus personnalisés
+              </h2>
+              <p className="text-lg text-muted-foreground mt-4 max-w-2xl mx-auto">
+                Le chef adapte chaque repas à vos besoins spécifiques.
+              </p>
+            </div>
+
+            {deliveryService.specializedMenus && deliveryService.specializedMenus.length > 0 && (
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                {deliveryService.specializedMenus.map((item, index) => (
+                  <Card key={index} className="border-2 border-border shadow-lg text-center">
+                    <CardContent className="pt-8 pb-6 px-6">
+                      <div className="flex justify-center mb-4">
+                        <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
+                          <span className="text-3xl" role="img" aria-hidden>
+                            {item.icon}
+                          </span>
+                        </div>
+                      </div>
+                      <h3 className="text-xl font-bold mb-2 text-foreground">{item.label}</h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed">
+                        {item.description}
+                      </p>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
+
+        {/* ── Menus de la semaine ── */}
+        {!isLoading && weeklyMenus && (
+          <section className="py-16 bg-background border-t border-border">
+            <div className="container">
+              <div className="text-center mb-12">
+                <p className="text-primary text-xl font-medium mb-3">Fraîcheur garantie</p>
+                <h2 className="text-4xl md:text-5xl font-bold text-foreground">
+                  Menus de la semaine
+                </h2>
+              </div>
+              <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+                <WeekColumn label={weeklyMenus.currentWeekLabel} meals={weeklyMenus.currentWeek} />
+                <WeekColumn label={weeklyMenus.nextWeekLabel} meals={weeklyMenus.nextWeek} />
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* ── Contact / Commander ── */}
+        <section className="py-20 bg-background border-t border-border">
+          <div className="container text-center max-w-2xl">
+            <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6">
+              <Mail className="w-8 h-8 text-primary" />
+            </div>
+            <h2 className="text-4xl font-bold text-foreground mb-4">Prêt à commander ?</h2>
+            <p className="text-lg text-muted-foreground mb-8">
+              Envoyez-nous un email avec les jours souhaités, le nombre de repas et votre adresse de livraison. Nous vous confirmons votre commande rapidement.
+            </p>
+            <a href={`mailto:${deliveryService.contactEmail ?? "contact@restecheztoi.com"}`}>
+              <Button size="lg" className="rounded-full px-10 text-lg h-14">
+                Commander par email
+              </Button>
+            </a>
+            <p className="text-sm text-muted-foreground mt-6">
+              {deliveryService.contactEmail ?? "contact@restecheztoi.com"}
+            </p>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+    </div>
+  );
+}

@@ -158,6 +158,118 @@ export async function fetchAllMenus(): Promise<SanityMenu[]> {
 
 // === Types : service de livraison ===
 
+// === Types : service de livraison ===
+
 export interface DeliveryServiceStep {
   icon: string;
-  title: stri
+  title: string;
+  description: string;
+}
+
+export interface SanityDeliveryServiceSchedule {
+  deliveryDay: string;
+  orderDeadline: string;
+  description?: string;
+}
+
+export interface SanityDeliveryServiceSpecializedMenu {
+  icon: string;
+  label: string;
+  description: string;
+}
+
+export interface SanityDeliveryService {
+  _id: string;
+  title: string;
+  tagline?: string;
+  pricePerMeal: number;
+  howItWorks: DeliveryServiceStep[];
+  contactEmail?: string;
+  deliverySchedule: SanityDeliveryServiceSchedule[];
+  specializedMenus?: SanityDeliveryServiceSpecializedMenu[];
+}
+
+// === Types : menus hebdomadaires ===
+
+export interface DailyMeal {
+  day: string;
+  dish: string;
+  description?: string;
+}
+
+export interface SanityWeeklyMenus {
+  _id: string;
+  currentWeekLabel: string;
+  currentWeek: DailyMeal[];
+  nextWeekLabel: string;
+  nextWeek: DailyMeal[];
+}
+
+// === Requêtes GROQ : service de livraison ===
+
+const DELIVERY_SERVICE_PROJECTION = `{
+  _id,
+  title,
+  tagline,
+  pricePerMeal,
+  contactEmail,
+  "howItWorks": coalesce(howItWorks, [])[]{
+    icon,
+    title,
+    description
+  },
+  "deliverySchedule": coalesce(deliverySchedule, [])[]{
+    deliveryDay,
+    orderDeadline,
+    description
+  },
+  "specializedMenus": coalesce(specializedMenus, [])[]{
+    icon,
+    label,
+    description
+  }
+}`;
+
+export async function fetchDeliveryService(): Promise<SanityDeliveryService | null> {
+  if (!sanity) return null;
+  try {
+    const result = await sanity.fetch<SanityDeliveryService | null>(
+      `*[_type == "deliveryService"][0]${DELIVERY_SERVICE_PROJECTION}`
+    );
+    return result ?? null;
+  } catch (err) {
+    console.warn("[Sanity] fetchDeliveryService a échoué :", err);
+    return null;
+  }
+}
+
+// === Requêtes GROQ : menus hebdomadaires ===
+
+const WEEKLY_MENUS_PROJECTION = `{
+  _id,
+  currentWeekLabel,
+  "currentWeek": coalesce(currentWeek, [])[]{
+    day,
+    dish,
+    description
+  },
+  nextWeekLabel,
+  "nextWeek": coalesce(nextWeek, [])[]{
+    day,
+    dish,
+    description
+  }
+}`;
+
+export async function fetchWeeklyMenus(): Promise<SanityWeeklyMenus | null> {
+  if (!sanity) return null;
+  try {
+    const result = await sanity.fetch<SanityWeeklyMenus | null>(
+      `*[_type == "weeklyMenus"][0]${WEEKLY_MENUS_PROJECTION}`
+    );
+    return result ?? null;
+  } catch (err) {
+    console.warn("[Sanity] fetchWeeklyMenus a échoué :", err);
+    return null;
+  }
+}

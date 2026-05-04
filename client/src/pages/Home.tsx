@@ -397,4 +397,54 @@ export default function Home() {
                   </div>
                   <div className="text-center">
                     <div className="inline-flex flex-col items-center bg-primary/10 border border-primary/20 rounded-xl px-6 py-3 gap-0.5">
-  
+                      <span className="text-5xl font-bold text-primary">19 CHF</span>
+                      <span className="text-sm font-medium text-muted-foreground">par repas livré</span>
+                    </div>
+                  </div>
+                  <p className="text-sm text-muted-foreground text-center">
+                    Lundi &amp; Mercredi · Lausanne
+                  </p>
+                </div>
+
+                {/* Partie droite : texte + CTA */}
+                <CardContent className="p-8 flex flex-col justify-center gap-5">
+                  <div>
+                    <p className="text-primary text-lg font-medium mb-2">Nouveau service</p>
+                    <h2 className="text-3xl font-bold text-foreground mb-3">
+                      Bien manger, sans contrainte
+                    </h2>
+                    <p className="text-lg text-muted-foreground leading-relaxed">
+                      Des repas faits maison, livrés chaque midi du lundi au vendredi à Lausanne.
+                      Cuisinés le matin même par le chef Malik avec des produits frais et de saison.
+                    </p>
+                  </div>
+                  <ul className="space-y-2">
+                    <li className="flex items-center gap-2 text-base text-muted-foreground">
+                      <Award className="w-5 h-5 text-primary flex-shrink-0" />
+                      <span>Produits frais, cuisine maison</span>
+                    </li>
+                    <li className="flex items-center gap-2 text-base text-muted-foreground">
+                      <Truck className="w-5 h-5 text-primary flex-shrink-0" />
+                      <span>Livraison à domicile · Lun &amp; Mer</span>
+                    </li>
+                    <li className="flex items-center gap-2 text-base text-muted-foreground">
+                      <Calendar className="w-5 h-5 text-primary flex-shrink-0" />
+                      <span>Commandez avant le vendredi / lundi</span>
+                    </li>
+                  </ul>
+                  <Link href="/livraison">
+                    <Button size="lg" className="rounded-full px-8 text-base w-full sm:w-auto">
+                      Découvrir la livraison
+                    </Button>
+                  </Link>
+                </CardContent>
+              </div>
+            </Card>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+    </div>
+  );
+}

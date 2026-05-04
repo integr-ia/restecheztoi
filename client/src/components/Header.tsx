@@ -82,4 +82,8 @@ export default function Header() {
               </Button>
             </Link>
           </nav>
-   
+           </div>
+      )}
+    </header>
+  );
+}

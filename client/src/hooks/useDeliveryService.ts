@@ -84,3 +84,35 @@ export function useDeliveryService(): UseDeliveryServiceResult {
     FALLBACK_DELIVERY_SERVICE
   );
   const [isLoading, setIsLoading] = useState<boolean>(sanityEnabled);
+  const [isFallback, setIsFallback] = useState<boolean>(!sanityEnabled);
+
+  useEffect(() => {
+    if (!sanityEnabled) {
+      setDeliveryService(FALLBACK_DELIVERY_SERVICE);
+      setIsFallback(true);
+      setIsLoading(false);
+      return;
+    }
+    let cancelled = false;
+    setIsLoading(true);
+    fetchDeliveryService()
+      .then((data) => {
+        if (cancelled) return;
+        if (data) {
+          setDeliveryService(data);
+          setIsFallback(false);
+        } else {
+          setDeliveryService(FALLBACK_DELIVERY_SERVICE);
+          setIsFallback(true);
+        }
+      })
+      .finally(() => {
+        if (!cancelled) setIsLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  return { deliveryService, isLoading, isFallback };
+}
